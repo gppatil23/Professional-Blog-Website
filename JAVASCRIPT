@@ -1,0 +1,50 @@
+const form = document.getElementById('inputpart');
+    const transactionsList = document.getElementById('blogs');
+    
+    // Load transactions from local storage
+    const transactions = JSON.parse(localStorage.getItem('blogs')) || [];
+    updateTransactionsDOM();
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const heading = document.getElementById('heading').value.trim();
+        const para = document.getElementById('blog').value.trim();
+        
+        if (heading === '' || para === '') {
+            alert('Please fill out all fields correctly.');
+            return;
+        }
+        
+        const transaction = {
+            heading,
+            para
+        };
+        
+        transactions.push(transaction);
+        localStorage.setItem('blogs', JSON.stringify(transactions));
+        updateTransactionsDOM();
+        
+        // Clear form fields
+        document.getElementById('heading').value = '';
+        document.getElementById('blog').value = '';
+    });
+    
+    function updateTransactionsDOM() {
+        transactionsList.innerHTML = '';
+        
+        transactions.forEach(transaction => {
+            const transactionElement = document.createElement('div');
+            transactionElement.classList.add('transaction');
+            transactionElement.innerHTML = `
+                <label>${transaction.heading}</label><br>
+                <p> ${transaction.para}</p>
+            `;
+            transactionsList.appendChild(transactionElement);
+        });
+    }
+
+
+    $(function(){
+        $("#inputpart").draggable()
+    })
