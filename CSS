@@ -1,71 +1,88 @@
-body{
+body {
     margin: 0px;
-
+    width: 100%;
+    background: linear-gradient(90deg, rgba(254, 11, 11, 0.351), rgba(247, 157, 157, 0.343),  rgba(219, 46, 254, 0.351));
 }
-.topslide{
-    height: 150px;
-    background: linear-gradient(145deg, rgb(67, 66, 66), black, rgb(81, 81, 81));
+
+.topslide {
     display: flex;
     justify-content: center;
+    width: 100%;
     align-items: center;
 }
-.topslide h1{
-    color: aliceblue;
-    font-family: Arial, Helvetica, sans-serif;
+
+.topslide h1 {
+    color: black;
+    font-family: cursive;
+    letter-spacing: 5px;
     font-weight: 800;
-    font-size: 4rem;
+    font-size: 3.5vw;
+    padding: 5px 100px;
 }
 
-#inputpart{
-    background-color: rgb(31, 31, 34);
-    display: flex;
-    width: 40rem;
-    flex-direction: column;
+#pencil {
+    height: 3vmax;
+    width: 3vmax;
     position: fixed;
-    top: 60%;
-    border-radius: 20px;
-    row-gap: 20px;
-    left: 25%;
-    padding: 10px 20px;
-}
-#inputpart div{
-    height: 4px;
-    border-radius: 50px;
-    margin-top: 5px;
-    align-self: center;
+    margin-left: 92vmax;
     background-color: aliceblue;
-    width: 150px;
-}
-#inputpart:hover{
+    padding: 1.2vmax;
+    border-radius: 20px;
+    box-shadow: 7px 7px 15px black;
+    top: 85%;
     cursor: pointer;
 }
-#inputpart input{
-    border-radius: 30px;
+
+#inputpart {
+    background-color: rgb(31, 31, 34);
+    display: flex;
+    width: 40vw;
+    flex-direction: column;
+    position: fixed;
+    bottom: 2%;
+    border-radius: 20px;
+    row-gap: 10px;
+    left: 30%;
+    padding: 15px 20px;
+}
+#inputpart:hover {
+    cursor: pointer;
+}
+
+#inputpart input {
+    border-radius: 10px;
     padding: 10px;
     border: none;
     font-size: 20px;
     background-color: whitesmoke;
     font-weight: 700;
 }
-#inputpart input::placeholder{
+
+#inputpart input::placeholder {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 25px;
+
 }
-#inputpart textarea{
+
+#inputpart textarea {
     border: none;
     border-radius: 10px;
     background-color: whitesmoke;
     padding: 10px;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
+
+
 }
-#inputpart textarea::placeholder{
+
+#inputpart textarea::placeholder {
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
 }
-button{
+
+#submit {
     font-size: 20px;
     width: 10rem;
     align-self: center;
@@ -77,36 +94,129 @@ button{
     padding: 10px;
     position: relative;
 }
-button:hover{
+
+#submit:hover {
     background-color: rgb(8, 8, 150);
 }
-#blogs{
-    width: 97%;
+
+label {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+#deletebtn {
+    border: black solid 1px;
+    border-radius: 5vmax;
+    padding: 1vmax;
+    font-weight: 800;
+    font-size: 20px;
+    float: right;
+    cursor: pointer;
+}
+
+#blogs {
+    width: 98%;
     height: auto;
     display: flex;
-    padding: 20px;
+    padding: 1.5vmax 1vmax;
     gap: 10px;
     flex-wrap: wrap;
-    justify-content:space-between ;
+    justify-content: space-between;
 }
-#blogs div{
-    padding: 20px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.588);
+
+#blogs div {
+    margin: .3vmax 0;
+    padding: 1vmax 2vmax;
+    box-shadow: .1vmax .1vmax 1vmax rgba(0, 0, 0, 0.588);
     border-radius: 10px;
-    width:  20rem;
+    width: 99%;
+    background-color: whitesmoke;
     min-height: 200px;
     display: flex;
     flex-wrap: nowrap;
     flex-grow: 3;
     flex-direction: column;
 }
-#blogs div label{
-    font-size: 2.5rem;
+
+#blogs div label {
+    font-size: 3vmax;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
+    font-weight: 700;
 }
-#blogs div p{
+
+#blogs div p {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.4rem;
+    font-size: 2vmax;
     line-break: auto;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: black;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(rgba(254, 11, 11, 0.917), rgba(179, 1, 255, 0.837));
+    border-radius: 50px;
+}
+
+@media (max-width:680px) {
+    body {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    .topslide {
+        width: 100%;
+    }
+
+    .topslide h1 {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    #pencil {
+        right: 3%;
+        height: 40px;
+        width: 40px;
+        background-color: aliceblue;
+    }
+
+    #inputpart {
+        width: 75%;
+        left: 10%;
+        padding: 10px;
+    }
+
+    #inputpart div {
+        display: none;
+    }
+
+    #blogs {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    #blogs div {
+        margin: 3px 10px;
+    }
+
+    #blogs div label {
+        font-size: 25px;
+    }
+
+    #blogs div p {
+        font-size: 18px;
+    }
+
+    #deletebtn {
+        background-color: rgba(0, 0, 0, 0.075);
+        border: none;
+        font-size: 15px;
+    }
 }
