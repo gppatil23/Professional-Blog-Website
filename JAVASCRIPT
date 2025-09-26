@@ -1,37 +1,32 @@
 const form = document.getElementById('inputpart');
 const transactionsList = document.getElementById('blogs');
+const headingInput = document.getElementById('heading');
+const blogInput = document.getElementById('blog');
+const inputPart = document.getElementById('inputpart');
+const pencil = document.getElementById('pencil');
 
-// Load transactions from local storage
-const transactions = JSON.parse(localStorage.getItem('blogs')) || [];
+let transactions = JSON.parse(localStorage.getItem('blogs')) || [];
 updateTransactionsDOM();
 
 form.addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const heading = document.getElementById('heading').value.trim();
-    const para = document.getElementById('blog').value.trim();
+    const heading = headingInput.value.trim();
+    const para = blogInput.value.trim();
 
-    if (heading === '' || para === '') {
+    if (!heading || !para) {
         alert('Please fill out all fields correctly.');
         return;
     }
 
-    const transaction = {
-        heading,
-        para
-    };
-
+    const transaction = { heading, para };
     transactions.push(transaction);
     localStorage.setItem('blogs', JSON.stringify(transactions));
     updateTransactionsDOM();
 
-    // Clear form fields
-    document.getElementById('heading').value = '';
-    document.getElementById('blog').value = '';
-
-    $(function () {
-        $("#inputpart").hide();
-    });
+    headingInput.value = '';
+    blogInput.value = '';
+    $("#inputpart").hide();
 });
 
 function updateTransactionsDOM() {
@@ -41,28 +36,35 @@ function updateTransactionsDOM() {
         const transactionElement = document.createElement('div');
         transactionElement.classList.add('transaction');
         transactionElement.innerHTML = `
-            <label>${transaction.heading} <button class="deletebtn" data-index="${index}" id = 'deletebtn'>Delete</button></label><br>
+            <div class="blog-header">
+                <span class="blog-title">${transaction.heading}</span>
+                <button class="deletebtn" data-index="${index}">Delete</button>
+            </div>
+
             <p>${transaction.para}</p>
         `;
         transactionsList.appendChild(transactionElement);
     });
-
-    // Delete button
-    document.querySelectorAll('.deletebtn').forEach(button => {
-        button.addEventListener('click', function () {
-            const index = this.getAttribute('data-index');
-            deleteTransaction(index);
-        });
-    });
 }
+
+transactionsList.addEventListener('click', function (e) {
+    if (e.target.classList.contains('deletebtn')) {
+        const index = e.target.getAttribute('data-index');
+        deleteTransaction(index);
+    }
+});
 
 function deleteTransaction(index) {
     transactions.splice(index, 1);
-
     localStorage.setItem('blogs', JSON.stringify(transactions));
-
     updateTransactionsDOM();
 }
+
+
+pencil.addEventListener('click', function (e) {
+    e.preventDefault();
+    inputPart.classList.toggle('active');
+});
 
 $(function () {
     $("#inputpart").hide();
