@@ -1,50 +1,73 @@
 const form = document.getElementById('inputpart');
-    const transactionsList = document.getElementById('blogs');
-    
-    // Load transactions from local storage
-    const transactions = JSON.parse(localStorage.getItem('blogs')) || [];
-    updateTransactionsDOM();
+const transactionsList = document.getElementById('blogs');
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        const heading = document.getElementById('heading').value.trim();
-        const para = document.getElementById('blog').value.trim();
-        
-        if (heading === '' || para === '') {
-            alert('Please fill out all fields correctly.');
-            return;
-        }
-        
-        const transaction = {
-            heading,
-            para
-        };
-        
-        transactions.push(transaction);
-        localStorage.setItem('blogs', JSON.stringify(transactions));
-        updateTransactionsDOM();
-        
-        // Clear form fields
-        document.getElementById('heading').value = '';
-        document.getElementById('blog').value = '';
-    });
-    
-    function updateTransactionsDOM() {
-        transactionsList.innerHTML = '';
-        
-        transactions.forEach(transaction => {
-            const transactionElement = document.createElement('div');
-            transactionElement.classList.add('transaction');
-            transactionElement.innerHTML = `
-                <label>${transaction.heading}</label><br>
-                <p> ${transaction.para}</p>
-            `;
-            transactionsList.appendChild(transactionElement);
-        });
+// Load transactions from local storage
+const transactions = JSON.parse(localStorage.getItem('blogs')) || [];
+updateTransactionsDOM();
+
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const heading = document.getElementById('heading').value.trim();
+    const para = document.getElementById('blog').value.trim();
+
+    if (heading === '' || para === '') {
+        alert('Please fill out all fields correctly.');
+        return;
     }
 
+    const transaction = {
+        heading,
+        para
+    };
 
-    $(function(){
-        $("#inputpart").draggable()
-    })
+    transactions.push(transaction);
+    localStorage.setItem('blogs', JSON.stringify(transactions));
+    updateTransactionsDOM();
+
+    // Clear form fields
+    document.getElementById('heading').value = '';
+    document.getElementById('blog').value = '';
+
+    $(function () {
+        $("#inputpart").hide();
+    });
+});
+
+function updateTransactionsDOM() {
+    transactionsList.innerHTML = '';
+
+    transactions.forEach((transaction, index) => {
+        const transactionElement = document.createElement('div');
+        transactionElement.classList.add('transaction');
+        transactionElement.innerHTML = `
+            <label>${transaction.heading} <button class="deletebtn" data-index="${index}" id = 'deletebtn'>Delete</button></label><br>
+            <p>${transaction.para}</p>
+        `;
+        transactionsList.appendChild(transactionElement);
+    });
+
+    // Delete button
+    document.querySelectorAll('.deletebtn').forEach(button => {
+        button.addEventListener('click', function () {
+            const index = this.getAttribute('data-index');
+            deleteTransaction(index);
+        });
+    });
+}
+
+function deleteTransaction(index) {
+    transactions.splice(index, 1);
+
+    localStorage.setItem('blogs', JSON.stringify(transactions));
+
+    updateTransactionsDOM();
+}
+
+$(function () {
+    $("#inputpart").hide();
+    $("#pencil").click(function (e) {
+        e.preventDefault();
+        $("#inputpart").slideToggle(100);
+    });
+});
