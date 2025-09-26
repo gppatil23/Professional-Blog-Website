@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogging Platform</title>
-    <link rel="stylesheet" href="blogging.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js"></script>
-
+    <title>Unique Blogs</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <div class="topslide">
         <h1>Unique Blogs</h1>
@@ -20,15 +12,14 @@
 
     <form id="inputpart">
         <input type="text" placeholder="Enter Heading of Blog" maxlength="100" id="heading">
-        <textarea name="blog" id="blog" rows="3" cols=50" maxlength="10000"
-            placeholder="Start Writing Your Blog Here..."></textarea>
-        <button type="submit" id="submit" onclick="submittion()">Submit</button>
+        <textarea id="blog" rows="5" maxlength="10000" placeholder="Start Writing Your Blog Here..."></textarea>
+        <button type="submit" id="submit">Submit</button>
     </form>
-    <img src="images/pencil.png" alt="image" id="pencil">
-    <div class="blogs" id="blogs">
-    </div>
-    <script src="blogging.js"></script>
 
+    <img src="pencil.png" alt="Toggle Input" id="pencil">
+
+    <div id="blogs"></div>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
